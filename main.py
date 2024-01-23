@@ -2,7 +2,6 @@ import requests
 import geocoder
 from datetime import datetime, timedelta
 
-
 class Forecast:
 
     def __init__(self):
@@ -80,6 +79,6 @@ class Forecast:
                 self.save_result_to_file(searched_date, location, result)
 
         if __name__ == "__main__":
-            weather_checker = Forecast
+            weather_checker = Forecast()
             weather_checker.main()
 
