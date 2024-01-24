@@ -2,10 +2,10 @@ import requests
 import geocoder
 from datetime import datetime, timedelta
 
+
 class Forecast:
 
     def __init__(self):
-        self.api_base_url = "https://api.open-meteo.com/v1/forecast"
         self.results_file = "weather_results.txt"
 
     def get_weather(self, latitude, longitude, searched_date):
@@ -29,7 +29,8 @@ class Forecast:
             try:
                 date_index = dates.index(searched_date)
                 if date_index < len(precipitation_sums):
-                    precipitation_sum = precipitation_sums[date_index] if precipitation_sums[date_index] is not None else 0.0
+                    precipitation_sum = precipitation_sums[date_index] if precipitation_sums[date_index] is not None \
+                        else 0.0
                 else:
                     precipitation_sum = 0.0
             except ValueError:
