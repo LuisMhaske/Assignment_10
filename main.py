@@ -9,8 +9,10 @@ class Forecast:
         self.results_file = "weather_results.txt"
 
     def get_weather(self, latitude, longitude, searched_date):
-        api_url = (f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&daily"
-                   f"=precipitation_sum&timezone=Europe%2FLondon&start_date={searched_date}&end_date={searched_date}")
+        api_url = (
+            f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&daily"
+            f"=precipitation_sum&timezone=Europe%2FLondon&start_date={searched_date}&end_date={searched_date}"
+        )
         response = requests.get(api_url)
 
         print("API Response:")
@@ -18,20 +20,33 @@ class Forecast:
 
         if response.status_code == 200:
             data = response.json()
-            if 'daily' in data and 'precipitation_sum' in data['daily'] and searched_date in data['daily']['precipitation_sum']:
-                precipitation_sum = data['daily']['precipitation_sum'][searched_date]
 
-                return precipitation_sum
-            else:
-                print(f"Error fetching weather data. Status code: {response.status_code}")
-                return None
+            # Extract the list of dates and precipitation sums
+            dates = data.get('daily', {}).get('time', [])
+            precipitation_sums = data.get('daily', {}).get('precipitation_sum', [])
+
+            # Find the index of the searched date in the list
+            try:
+                date_index = dates.index(searched_date)
+                if date_index < len(precipitation_sums):
+                    precipitation_sum = precipitation_sums[date_index] if precipitation_sums[date_index] is not None else 0.0
+                else:
+                    precipitation_sum = 0.0
+            except ValueError:
+                precipitation_sum = 0.0
+
+            return precipitation_sum
+        else:
+            print(f"Error fetching weather data. Status code: {response.status_code}")
+            print(response.content)  # Print the content for further analysis
+            return None
 
     def get_location_coordinates(self):
         while True:
             location = input("Enter the location (city, country): ")
             try:
                 g = geocoder.osm(location)
-                print(g.location)
+                print(f"Location: {location}, Coordinates: {g.latlng}")
                 return g.latlng
             except Exception as e:
                 print(f"Error: {e}, Please enter valid location.")
