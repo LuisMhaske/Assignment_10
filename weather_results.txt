@@ -8,3 +8,4 @@
 2024-01-23 - Shaniwar Peth, Pune City, Pune, Maharashtra, 411002, India: It will not rain.
 2024-01-20 - General Post Office, O'Connell Street Lower, North City Ward 1986, Dublin, County Dublin, Leinster, D01 F5P2, Éire / Ireland: It will rain. Precipitation value: 3.6
 2023-06-25 - General Post Office, O'Connell Street Lower, North City Ward 1986, Dublin, County Dublin, Leinster, D01 F5P2, Éire / Ireland: It will not rain.
+2024-01-20 - City Hall, Anglesea Street, City Hall A ED, Cork, County Cork, Munster, T12 T997, Éire / Ireland: It will rain. Precipitation value: 18.9
